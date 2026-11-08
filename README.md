@@ -1,40 +1,99 @@
-# Api Security Testing
+# claude-api-security-testing-skill
+
+A Claude Code skill for assessing the security of REST and GraphQL APIs through authorized testing and defensive validation.
 
 ## Overview
 
-This repository contains a Claude skill focused on api security testing. It provides structured guidance for planning, executing, and reviewing the related work.
+This skill provides a structured workflow for identifying API security weaknesses. It focuses on authentication, authorization, input validation, rate limiting, data exposure, and API-specific attack surfaces.
 
-## What It Covers
+Use it only against systems that the user owns or is explicitly authorized to assess.
 
-- Core concepts and the skill's intended scope.
-- Practical workflows and decision points.
-- Guidance for producing clear, actionable outputs.
-- Original supporting files included with the skill.
+## Main Assessment Areas
 
-## Repository Structure
+- API endpoint discovery and inventory.
+- Authentication and session validation.
+- Object-level and function-level authorization.
+- Input validation and schema enforcement.
+- Rate limiting and abuse prevention.
+- Sensitive data exposure.
+- GraphQL schema and resolver access controls.
+- Error handling and information leakage.
+- Security configuration and transport protections.
 
-```text
-SKILL.md
+## When to Use It
+
+Use the skill when testing REST or GraphQL APIs, validating authentication and authorization, reviewing rate limits, or preparing an API security assessment.
+
+## Installation
+
+```bash
+git clone https://github.com/Brajesh31/claude-api-security-testing-skill.git ~/.claude/skills/api-security-testing
 ```
 
-## Requirements
+## Usage
 
-- A Claude-compatible environment with skill support.
-- A clearly defined project goal and relevant context.
-- Appropriate access and permissions for any systems involved.
+Invoke the skill for an authorized API security review:
 
-## Getting Started
+```text
+/api-security-testing
+```
 
-1. Read `SKILL.md` for the complete instructions.
-2. Install the skill in your Claude environment's supported skills directory.
-3. Describe the project, intended users, constraints, and success criteria.
-4. Follow the workflow and refine the output against project needs.
-5. Review all deliverables before using or publishing them.
+Provide the API base URL or local project, scope, authorization details, test environment, allowed methods, and prohibited actions.
 
-## Quality and Safety
+## Assessment Workflow
 
-Keep assumptions explicit, protect sensitive information, and validate recommendations against real requirements. For security-related activities, work only within explicitly authorized environments.
+1. Confirm authorization and scope.
+2. Inventory routes, methods, and API schemas.
+3. Identify authentication mechanisms.
+4. Review object and function authorization.
+5. Test input validation using safe, bounded cases.
+6. Review rate limits and resource controls.
+7. Check data exposure and error behavior.
+8. Assess GraphQL access controls where applicable.
+9. Record reproducible evidence.
+10. Prioritize findings and recommend remediation.
+11. Re-test fixes within the approved scope.
 
-## License
+## Reporting Format
 
-MIT. See [LICENSE](LICENSE).
+| Field | Description |
+|---|---|
+| Finding | Clear vulnerability or weakness |
+| Endpoint | Affected route or operation |
+| Preconditions | Required account or role |
+| Evidence | Sanitized, reproducible proof |
+| Impact | Realistic consequence |
+| Severity | Risk-based priority |
+| Remediation | Specific fix |
+| Retest | Verification result |
+
+## Security Checklist
+
+- Authentication is required where appropriate.
+- Authorization is checked for each protected resource.
+- User-controlled identifiers cannot bypass ownership checks.
+- Inputs are validated against expected schemas.
+- Sensitive fields are not returned unnecessarily.
+- Rate limits protect expensive operations.
+- Errors do not reveal secrets or internal details.
+- GraphQL resolvers enforce access controls.
+- Logs avoid sensitive request data.
+- Tests cover both permitted and denied access.
+
+## Repository Contents
+
+- `SKILL.md`: Main API security testing workflow.
+- `README.md`: Scope, assessment phases, and reporting guidance.
+
+## Safety Boundaries
+
+- Do not test systems without explicit authorization.
+- Avoid destructive operations and service disruption.
+- Do not access unrelated user data.
+- Stop if testing reveals unexpected sensitive information.
+- Keep evidence sanitized.
+- Respect rate limits and agreed testing windows.
+
+## Practical Principle
+
+A successful request does not prove an API is secure. Test authorization boundaries and failure cases, and report only findings supported by evidence.
